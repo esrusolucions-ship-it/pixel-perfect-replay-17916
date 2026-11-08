@@ -14,7 +14,7 @@ export function MenuSection() {
             </h2>
           </div>
 
-          <Tabs defaultValue={menu[0]?.id} className="mt-10">
+          <Tabs defaultValue={menu[0]?.id ?? ""} className="mt-10">
             <TabsList className="grid h-auto w-full grid-cols-2 gap-1 rounded-2xl bg-card p-1.5 shadow-soft sm:grid-cols-4">
               {menu.map((cat) => (
                 <TabsTrigger
