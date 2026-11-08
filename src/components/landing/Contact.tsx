@@ -11,7 +11,7 @@ import { FadeIn } from "./FadeIn";
 
 const emptyValues: ContactFormValues = { name: "", email: "", phone: "", message: "" };
 
-function FieldError({ id, message }: { id: string; message?: string }) {
+function FieldError({ id, message }: { id: string; message?: string | undefined }) {
   if (!message) return null;
   return (
     <p id={id} className="mt-1.5 text-sm text-destructive" role="alert">

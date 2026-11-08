@@ -14,7 +14,7 @@ export function FadeIn({ children, className }: { children: ReactNode; className
     }
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
+        if (entry?.isIntersecting) {
           setVisible(true);
           observer.disconnect();
         }
