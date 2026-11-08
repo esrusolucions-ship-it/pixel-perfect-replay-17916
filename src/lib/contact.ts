@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { supabase } from "@/integrations/supabase/client";
 
 export const contactSchema = z.object({
   name: z
@@ -30,12 +31,18 @@ export const contactSchema = z.object({
 export type ContactFormValues = z.infer<typeof contactSchema>;
 
 /**
- * Envía el mensaje de contacto.
- * De momento no hay backend conectado: simula el envío.
- * Para conectarlo más adelante, sustituye el cuerpo de esta función por la llamada real.
+ * Guarda el mensaje de contacto en la tabla "mensajes_contacto".
+ * Los visitantes solo pueden insertar; nadie puede leer los mensajes desde la web.
+ * Lanza un error si el envío falla.
  */
 export async function submitContactMessage(values: ContactFormValues): Promise<void> {
   const data = contactSchema.parse(values);
-  await new Promise((resolve) => setTimeout(resolve, 900));
-  void data;
+  const telefono = data.phone?.trim();
+  const { error } = await supabase.from("mensajes_contacto").insert({
+    nombre: data.name,
+    email: data.email,
+    telefono: telefono ? telefono : null,
+    mensaje: data.message,
+  });
+  if (error) throw new Error(error.message);
 }

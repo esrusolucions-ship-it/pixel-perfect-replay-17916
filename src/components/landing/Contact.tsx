@@ -41,7 +41,7 @@ export function Contact() {
       reset(emptyValues);
       setSent(true);
     } catch {
-      setSubmitError("No hemos podido enviar tu mensaje. Inténtalo de nuevo en unos minutos.");
+      setSubmitError("No se ha podido enviar el mensaje, inténtalo de nuevo");
     }
   };
 
