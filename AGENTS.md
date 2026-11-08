@@ -28,3 +28,8 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+- The landing is one route (`/`) composed of one component per section in `src/components/landing/`; sections are reached by in-page anchors because the brief explicitly asks for a single scrolling page.
+- Menu items live in `src/data/menu.ts` so they can be edited without touching components.
+- Contact validation lives in `src/lib/contact.ts` (shared zod schema) and `submitContactMessage` there is the single place to wire a real backend later.
