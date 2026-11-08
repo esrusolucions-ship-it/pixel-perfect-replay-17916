@@ -1,23 +1,43 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Navbar } from "@/components/landing/Navbar";
+import { Hero, HERO_IMAGE } from "@/components/landing/Hero";
+import { About } from "@/components/landing/About";
+import { MenuSection } from "@/components/landing/MenuSection";
+import { Contact } from "@/components/landing/Contact";
+import { Footer } from "@/components/landing/Footer";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const TITLE = "Café La Esquina · Café de especialidad y repostería casera";
+const DESCRIPTION =
+  "Cafetería de barrio en Calle Mayor 12: café de especialidad, desayunos y repostería hecha en casa. Consulta la carta y escríbenos.";
+const OG_IMAGE = HERO_IMAGE.replace("w=1920", "w=1200&h=630");
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: TITLE },
+      { name: "description", content: DESCRIPTION },
+      { property: "og:title", content: TITLE },
+      { property: "og:description", content: DESCRIPTION },
+      { property: "og:type", content: "website" },
+      { property: "og:image", content: OG_IMAGE },
+      { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:image", content: OG_IMAGE },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <>
+      <Navbar />
+      <main>
+        <Hero />
+        <About />
+        <MenuSection />
+        <Contact />
+      </main>
+      <Footer />
+    </>
   );
 }
